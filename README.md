@@ -26,3 +26,4 @@ Es un espacio dedicado a  exhibir y promover obras visuales, pinturas, escultura
 
 
 hola somos los apostoles
+- Quitamos Servicios del proyecto
