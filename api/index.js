@@ -2,17 +2,19 @@ import cors from "cors";
 import express from "express";
 import dataGallery from "./data/gallery.data.js"
 import dataArtist from "./data/artists.data.js";
+import dotenv from "dotenv";
+import connectDB from "./src/config/db.js";
 /* 
 Nota: Usamos 'import' gracias a que configuramos "type": "module" 
 en package.json.
 Es la forma moderna de hacer: const express = require("express");
 */
 
-console.log("Datos de posts cargados:", dataGallery);
-
 const api = express(); // Creamos la instancia de la aplicación Express
-const PORT = 3000;     // Definimos el puerto donde escuchará el servidor
+dotenv.config();
+const PORT = process.env.PORT || 3000;
 
+await connectDB();
 
 // Middleware: Permite que lleguen peticiones desde otros dominios (CORS)
 
