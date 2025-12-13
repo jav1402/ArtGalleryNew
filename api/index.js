@@ -71,6 +71,18 @@ api.post("/picture", async (req, res) => {
     }
 })
 
+api.post("/Artist", async (req, res) => {
+    try {
+        const artistData = req.body;
+        const newArtist = new Artist(artistData);
+        const savedArtist = await newArtist.save();
+        res.status(201).json(savedArtist);
+    } catch (err) {
+        console.log("[ERROR] POST /Artist:", err);
+        res.status(500).json({ error: "DB_ERROR" });
+    }
+});
+
 // Encendemos el servidor
 api.listen(PORT, () => {
     console.log(`API server running at http://localhost:${PORT}`);
