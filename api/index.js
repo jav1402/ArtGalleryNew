@@ -1,9 +1,10 @@
 import cors from "cors";
 import express from "express";
-import dataGallery from "./data/gallery.data.js"
-import dataArtist from "./data/artists.data.js";
+// import dataGallery from "./data/gallery.data.js"
+// import dataArtist from "./data/artists.data.js";
 import dotenv from "dotenv";
 import connectDB from "./src/config/db.js";
+import Room from "./src/models/gallery.model.js";
 /* 
 Nota: Usamos 'import' gracias a que configuramos "type": "module" 
 en package.json.
@@ -30,9 +31,16 @@ api.get("/dataArtist", (req, res) => {
     res.json(dataArtist);
 });
 
-api.get("/dataGallery", (req, res) => {
-  res.json(dataGallery); // Respondemos enviando los datos como JSON
+api.get("/Rooms", async  (req, res) => {
+    try {
+        const rooms = await Room.find().lean();
+        res.json(rooms);
+    } catch (err) {
+        console.error("[ERROR] GET /rooms:", err);
+        res.json({ error: "DB_ERROR" });
+    }
 });
+
 // Encendemos el servidor
 api.listen(PORT, () => {
     console.log(`API server running at http://localhost:${PORT}`);
