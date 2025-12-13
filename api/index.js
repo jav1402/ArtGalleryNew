@@ -1,10 +1,10 @@
 import cors from "cors";
 import express from "express";
-// import dataGallery from "./data/gallery.data.js"
-// import dataArtist from "./data/artists.data.js";
 import dotenv from "dotenv";
 import connectDB from "./src/config/db.js";
 import Room from "./src/models/gallery.model.js";
+import Artist from "./src/models/artists.model.js";
+import Picture from "./src/models/picture.model.js";
 /* 
 Nota: Usamos 'import' gracias a que configuramos "type": "module" 
 en package.json.
@@ -27,8 +27,15 @@ api.get("/", (req, res) => {
 });
 
 // Ruta GET para obtener todas las publicaciones
-api.get("/dataArtist", (req, res) => {
-    res.json(dataArtist);
+api.get("/Artist", async (req, res) => {
+    try {
+        const artists = await Artist.find().lean();
+        res.json(artists);
+    }
+    catch (err) {
+        console.error("[ERROR] GET /artists:", err);
+        res.json({ error: "DB_ERROR"});
+    }
 });
 
 api.get("/Rooms", async  (req, res) => {
@@ -36,7 +43,17 @@ api.get("/Rooms", async  (req, res) => {
         const rooms = await Room.find().lean();
         res.json(rooms);
     } catch (err) {
-        console.error("[ERROR] GET /rooms:", err);
+        console.error("[ERROR] GET /picture:", err);
+        res.json({ error: "DB_ERROR" });
+    }
+});
+
+api.get("/picture", async (req, res) => {
+    try {
+        const pictures = await Picture.find().lean();
+        res.json(pictures);
+    } catch (err) {
+        console.error("[ERROR] GET /picture:", err);
         res.json({ error: "DB_ERROR" });
     }
 });
