@@ -2,7 +2,11 @@ import cors from "cors";
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./src/config/db.js";
+<<<<<<< HEAD
 import Artist from "./src/models/artists.model.js";
+=======
+import Picture from "./src/models/picture.model.js";
+>>>>>>> 9fad6f3a3e4979da6f62d9b234486d0f066aba4a
 /* 
 Nota: Usamos 'import' gracias a que configuramos "type": "module" 
 en package.json.
@@ -37,7 +41,16 @@ api.get("/Artist", async (req, res) => {
 });
 
 api.get("/dataGallery", (req, res) => {
-  res.json(dataGallery); // Respondemos enviando los datos como JSON
+    res.json(dataGallery); // Respondemos enviando los datos como JSON
+});
+api.get("/picture", async (req, res) => {
+    try {
+        const pictures = await Picture.find().lean();
+        res.json(pictures);
+    } catch (err) {
+        console.error("[ERROR] GET /picture:", err);
+        res.json({ error: "DB_ERROR" });
+    }
 });
 // Encendemos el servidor
 api.listen(PORT, () => {
