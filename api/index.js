@@ -20,6 +20,7 @@ await connectDB();
 // Middleware: Permite que lleguen peticiones desde otros dominios (CORS)
 
 api.use(cors());
+api.use(express.json())
 
 api.use(express.json()); // Necesario para leer el req.body, útil para rutas POST/PUT
 
@@ -28,7 +29,7 @@ api.use(express.json()); // Necesario para leer el req.body, útil para rutas PO
 api.get("/", (req, res) => {
     res.send("Hello World!");
 });
-
+cla
 // Ruta GET para obtener todas las publicaciones
 api.get("/Artist", async (req, res) => {
     try {
@@ -58,6 +59,30 @@ api.get("/picture", async (req, res) => {
     } catch (err) {
         console.error("[ERROR] GET /picture:", err);
         res.json({ error: "DB_ERROR" });
+    }
+});
+api.post("/picture", async (req, res) => {
+    try {
+        const pictureData = req.body;
+        console.log("PictureData", pictureData)
+        const newPicture = new Picture(pictureData);
+        const savedPicture = await newPicture.save();
+        res.status(201).json(savedPicture);
+    } catch (err) {
+        console.error("[ERROR] POST /picture:", err);
+        res.status(500).json({ error: "DB_ERROR" });
+    }
+})
+
+api.post("/Artist", async (req, res) => {
+    try {
+        const artistData = req.body;
+        const newArtist = new Artist(artistData);
+        const savedArtist = await newArtist.save();
+        res.status(201).json(savedArtist);
+    } catch (err) {
+        console.log("[ERROR] POST /Artist:", err);
+        res.status(500).json({ error: "DB_ERROR" });
     }
 });
 
