@@ -2,11 +2,8 @@ import cors from "cors";
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./src/config/db.js";
-<<<<<<< HEAD
 import Artist from "./src/models/artists.model.js";
-=======
 import Picture from "./src/models/picture.model.js";
->>>>>>> 9fad6f3a3e4979da6f62d9b234486d0f066aba4a
 /* 
 Nota: Usamos 'import' gracias a que configuramos "type": "module" 
 en package.json.
