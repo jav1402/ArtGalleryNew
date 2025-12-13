@@ -20,6 +20,7 @@ await connectDB();
 // Middleware: Permite que lleguen peticiones desde otros dominios (CORS)
 
 api.use(cors());
+api.use(express.json())
 
 // Ruta de prueba: Para verificar que el servidor responde
 api.get("/", (req, res) => {
@@ -34,11 +35,11 @@ api.get("/Artist", async (req, res) => {
     }
     catch (err) {
         console.error("[ERROR] GET /artists:", err);
-        res.json({ error: "DB_ERROR"});
+        res.json({ error: "DB_ERROR" });
     }
 });
 
-api.get("/Rooms", async  (req, res) => {
+api.get("/Rooms", async (req, res) => {
     try {
         const rooms = await Room.find().lean();
         res.json(rooms);
@@ -57,6 +58,18 @@ api.get("/picture", async (req, res) => {
         res.json({ error: "DB_ERROR" });
     }
 });
+api.post("/picture", async (req, res) => {
+    try {
+        const pictureData = req.body;
+        console.log("PictureData", pictureData)
+        const newPicture = new Picture(pictureData);
+        const savedPicture = await newPicture.save();
+        res.status(201).json(savedPicture);
+    } catch (err) {
+        console.error("[ERROR] POST /picture:", err);
+        res.status(500).json({ error: "DB_ERROR" });
+    }
+})
 
 // Encendemos el servidor
 api.listen(PORT, () => {
