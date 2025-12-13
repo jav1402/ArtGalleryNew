@@ -21,6 +21,9 @@ await connectDB();
 
 api.use(cors());
 
+api.use(express.json()); // Necesario para leer el req.body, útil para rutas POST/PUT
+
+
 // Ruta de prueba: Para verificar que el servidor responde
 api.get("/", (req, res) => {
     res.send("Hello World!");
@@ -34,11 +37,11 @@ api.get("/Artist", async (req, res) => {
     }
     catch (err) {
         console.error("[ERROR] GET /artists:", err);
-        res.json({ error: "DB_ERROR"});
+        res.json({ error: "DB_ERROR" });
     }
 });
 
-api.get("/Rooms", async  (req, res) => {
+api.get("/Room", async (req, res) => {
     try {
         const rooms = await Room.find().lean();
         res.json(rooms);
@@ -55,6 +58,46 @@ api.get("/picture", async (req, res) => {
     } catch (err) {
         console.error("[ERROR] GET /picture:", err);
         res.json({ error: "DB_ERROR" });
+    }
+});
+
+
+// Ruta para crear una nueva publicación (post)
+// La petición POST se utiliza para enviar datos al servidor
+
+api.post("/Room", async (req, res) => {
+    try {
+        const roomData = req.body;
+
+        const newRoom = new Room(roomData); // Crear una nueva instancia del modelo Post con los datos del cuerpo de la solicitud
+
+        const savedRoom = await newRoom.save(); // Guardar el nuevo post en la base de datos
+        res.status(201).json(savedRoom); // Devolver el post guardado con un estado 201 (Creado)
+    } catch (err) {
+        console.error("[ERROR] POST /Room:", err);
+        res.status(500).json({ error: "DB_ERROR" });
+    }
+});
+
+// Ruta para eliminar una publicación (post) por su ID
+// La petición DELETE se utiliza para eliminar recursos del servidor
+api.delete("/Room/:id", async (req, res) => {
+    try {
+        const roomId = [req.params.id];
+
+        // Buscar y eliminar el post por su ID
+        const deletedRoom = await Room.findByIdAndDelete(roomId);
+
+        // Si no se encuentra el post, devolver un error 404
+        if (!deletedRoom) {
+            return res.status(404).json({ error: "POST_NOT_FOUND" });
+        }
+
+        // Devolver el post eliminado
+        return res.json(deletedRoom);
+    } catch (err) {
+        console.error("[ERROR] DELETE /posts/:id:", err);
+        return res.status(500).json({ error: "DB_ERROR" });
     }
 });
 
