@@ -26,7 +26,7 @@ api.use(express.json())
 api.get("/", (req, res) => {
     res.send("Hello World!");
 });
-
+cla
 // Ruta GET para obtener todas las publicaciones
 api.get("/Artist", async (req, res) => {
     try {
