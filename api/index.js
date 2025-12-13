@@ -83,7 +83,7 @@ api.post("/Room", async (req, res) => {
 // La petición DELETE se utiliza para eliminar recursos del servidor
 api.delete("/Room/:id", async (req, res) => {
     try {
-        const roomId = [req.params.id];
+        const roomId = req.params.id;
 
         // Buscar y eliminar el post por su ID
         const deletedRoom = await Room.findByIdAndDelete(roomId);
