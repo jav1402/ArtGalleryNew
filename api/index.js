@@ -29,7 +29,7 @@ api.use(express.json()); // Necesario para leer el req.body, útil para rutas PO
 api.get("/", (req, res) => {
     res.send("Hello World!");
 });
-cla
+
 // Ruta GET para obtener todas las publicaciones
 api.get("/Artist", async (req, res) => {
     try {
@@ -122,6 +122,55 @@ api.delete("/Room/:id", async (req, res) => {
         return res.json(deletedRoom);
     } catch (err) {
         console.error("[ERROR] DELETE /posts/:id:", err);
+        return res.status(500).json({ error: "DB_ERROR" });
+    }
+});
+
+
+api.delete("/Artist/:id", async (req, res) => {
+    try {
+        const artistId = req.params.id;
+
+        // Buscar y eliminar el post por su ID
+        const deletedArtist = await Artist.findByIdAndDelete(artistId);
+
+        // Si no se encuentra el post, devolver un error 404
+        if (!deletedArtist) {
+            return res.status(404).json({ error: "POST_NOT_FOUND" });
+        }
+
+        // Devolver el post eliminado
+        return res.json(deletedArtist);
+    } catch (err) {
+        console.error("[ERROR] DELETE /Artist/id:", err);
+        return res.status(500).json({ error: "DB_ERROR" });
+    }
+    
+});
+
+api.put("/Artist/:id", async (req, res) => {
+    try {
+        const artistId = req.params.id;
+        const updateData = req.body;
+
+        // Buscar el post por su ID
+        const artist = await Artist.findById(artistId);
+
+        // Si no se encuentra, 404
+        if (!artist) {
+            return res.status(404).json({ error: "ARTIST_NOT_FOUND" });
+        }
+
+        // Aplicar cambios recibidos al documento
+        artist.set(updateData);
+
+        // Guardar cambios en la base de datos
+        const updatedArtist = await artist.save();
+
+        // Devolver el post actualizado
+        return res.json(updatedArtist);
+    } catch (err) {
+        console.error("[ERROR] PUT /Artist/: id :", err);
         return res.status(500).json({ error: "DB_ERROR" });
     }
 });
