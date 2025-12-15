@@ -29,8 +29,15 @@ api.use(express.json()); // Necesario para leer el req.body, útil para rutas PO
 api.get("/", (req, res) => {
     res.send("Hello World!");
 });
-cla
+
+
+//---- GET -------------------------------------------------------------------------------//
+
 // Ruta GET para obtener todas las publicaciones
+
+//---- ARTIST --------------//
+
+
 api.get("/Artist", async (req, res) => {
     try {
         const artists = await Artist.find().lean();
@@ -42,6 +49,8 @@ api.get("/Artist", async (req, res) => {
     }
 });
 
+//---- ROOM --------------//
+
 api.get("/Room", async (req, res) => {
     try {
         const rooms = await Room.find().lean();
@@ -52,6 +61,8 @@ api.get("/Room", async (req, res) => {
     }
 });
 
+//---- PICTURE --------------//
+
 api.get("/picture", async (req, res) => {
     try {
         const pictures = await Picture.find().lean();
@@ -61,6 +72,17 @@ api.get("/picture", async (req, res) => {
         res.json({ error: "DB_ERROR" });
     }
 });
+
+
+//---- POST -------------------------------------------------------------------------------//
+
+// Ruta para crear una nueva publicación (post)
+// La petición POST se utiliza para enviar datos al servidor
+
+
+//---- PICTURE --------------//
+
+
 api.post("/picture", async (req, res) => {
     try {
         const pictureData = req.body;
@@ -73,6 +95,8 @@ api.post("/picture", async (req, res) => {
         res.status(500).json({ error: "DB_ERROR" });
     }
 })
+
+//---- ARTIST --------------//
 
 api.post("/Artist", async (req, res) => {
     try {
@@ -87,8 +111,7 @@ api.post("/Artist", async (req, res) => {
 });
 
 
-// Ruta para crear una nueva publicación (post)
-// La petición POST se utiliza para enviar datos al servidor
+//---- ROOM --------------//
 
 api.post("/Room", async (req, res) => {
     try {
@@ -104,8 +127,26 @@ api.post("/Room", async (req, res) => {
     }
 });
 
+
+
+//---- DELETE -------------------------------------------------------------------------------//
+
 // Ruta para eliminar una publicación (post) por su ID
 // La petición DELETE se utiliza para eliminar recursos del servidor
+
+
+
+//---- PICTURE --------------//
+
+
+
+//---- ARTIST --------------//
+
+
+
+
+//---- ROOM --------------//
+
 api.delete("/Room/:id", async (req, res) => {
     try {
         const roomId = req.params.id;
@@ -121,10 +162,60 @@ api.delete("/Room/:id", async (req, res) => {
         // Devolver el post eliminado
         return res.json(deletedRoom);
     } catch (err) {
-        console.error("[ERROR] DELETE /posts/:id:", err);
+        console.error("[ERROR] DELETE /Room/:id:", err);
         return res.status(500).json({ error: "DB_ERROR" });
     }
 });
+
+
+//---- PUT -------------------------------------------------------------------------------//
+
+// Ruta para actualizar una publicación (post) por su ID
+// La petición PUT se utiliza para reemplazar/actualizar recursos en el servidor
+
+
+
+
+//---- PICTURE --------------//
+
+
+
+//---- ARTIST --------------//
+
+
+
+
+//---- ROOM --------------//
+
+
+api.put("/Room/:id", async (req, res) => {
+    try {
+        const roomId = req.params.id;
+        const updateData = req.body;
+
+        // Buscar el post por su ID
+        const room = await Room.findById(roomId);
+
+        // Si no se encuentra, 404
+        if (!room) {
+            return res.status(404).json({ error: "ROOM_NOT_FOUND" });
+        }
+
+        // Aplicar cambios recibidos al documento
+        room.set(updateData);
+
+        // Guardar cambios en la base de datos
+        const updatedRoom = await room.save();
+
+        // Devolver el post actualizado
+        return res.json(updatedRoom);
+    } catch (err) {
+        console.error("[ERROR] PUT /Room/:id:", err);
+        return res.status(500).json({ error: "DB_ERROR" });
+    }
+});
+
+
 
 // Encendemos el servidor
 api.listen(PORT, () => {
