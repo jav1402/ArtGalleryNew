@@ -54,6 +54,10 @@ api.get("/Artist", async (req, res) => {
 api.get("/Room", async (req, res) => {
     try {
         const rooms = await Room.find().lean();
+        rooms.forEach((room)=>{
+            room.id = room._id.toString()
+            delete room._id
+        })
         res.json(rooms);
     } catch (err) {
         console.error("[ERROR] GET /picture:", err);

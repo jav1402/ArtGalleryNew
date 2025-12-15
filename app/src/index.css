@@ -149,7 +149,7 @@ body {
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow);
-    height: 280px;
+    height: 450px;
 }
 
 .room-image-wrap {

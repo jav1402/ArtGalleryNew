@@ -1,5 +1,6 @@
 export default function Room({ roomProp, onDelete, onUpdate}) {
     const { id, name, image, description } = roomProp;
+    console.log(roomProp)
 
     
     return (
