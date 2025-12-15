@@ -29,7 +29,7 @@ api.use(express.json()); // Necesario para leer el req.body, útil para rutas PO
 api.get("/", (req, res) => {
     res.send("Hello World!");
 });
-cla
+
 // Ruta GET para obtener todas las publicaciones
 api.get("/Artist", async (req, res) => {
     try {
@@ -125,6 +125,48 @@ api.delete("/Room/:id", async (req, res) => {
         return res.status(500).json({ error: "DB_ERROR" });
     }
 });
+api.delete("/picture/:id", async (req, res) => {
+    try {
+        const pictureId = req.params.id;
+        const deletedPicture = await Picture.findByIdAndDelete(pictureId);
+        if (!deletedPicture) {
+            return res.status(404).json({ error: "POST_NOT_FOUND" });
+        }
+        return res.json(deletedPicture);
+    } catch (err) {
+        console.error("[ERROR] DELETE /posts/:id:", err);
+        return res.status(500).json({ error: "DB_ERROR" });
+    }
+});
+// Utilizamos el put para reemplazar o actualizar en el servidor
+api.put("/picture/:id", async (req, res) => {
+    try {
+        const pictureId = req.params.id; //extrae el número de id a modificar
+        const updateData = req.body;
+        const picture = await Picture.findById(pictureId);
+        // Si no encuentra la "picture por su id" devuelve error 404.
+        if (!picture) {
+            return res.status(404).json({ error: "POST_NOT_FOUND" });
+        }
+    picture.set(updateData);//aplica los cambios al documento
+
+    const updatedPicture = await picture.save();
+    return res.json(updatedPicture);
+    } catch (err) {
+    console.error("[ERROR] PUT /picture/:id", err);
+    return res.status(500).json({ error: "DB_ERROR" });
+    }
+});
+
+    
+
+    
+
+    
+
+
+
+
 
 // Encendemos el servidor
 api.listen(PORT, () => {
