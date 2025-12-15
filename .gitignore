@@ -13,6 +13,7 @@ api/.env
 
 #frontend
 app/node_modules/
+app/.env
 
 node_modules/
 dist

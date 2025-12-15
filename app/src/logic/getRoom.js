@@ -1,6 +1,6 @@
-async function getDataGallery(){
+async function getRoom(){
   // Hacemos la petición a la URL de TU servidor local
-  return fetch("http://localhost:3000/dataGallery")
+  return fetch("http://localhost:3000/Room")
     .then((response) => response.json()) // 1. Recibimos respuesta y la convertimos a JSON
     .then((data) => {
       console.log(data); // 2. Vemos los datos por consola (opcional, para debug)
@@ -11,4 +11,4 @@ async function getDataGallery(){
     });
 }
 
-export default getDataGallery
+export default getRoom

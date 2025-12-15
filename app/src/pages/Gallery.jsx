@@ -1,9 +1,10 @@
 import Room from "../components/Room";
-import dataGallery from "../data/dataGallery";
 import { useState, useEffect } from "react";
 import CreateFormGallery from "../components/CreateFormGallery";
 import UpdateFormGallery from "../components/UpdateFormGallery";
-import getDataGallery from "../logic/getDataGallery";
+import createRoom from "../logic/createRoom";
+import getRoom from "../logic/getRoom";
+
 
 
 function Gallery() {
@@ -15,11 +16,16 @@ function Gallery() {
 
 
     useEffect(() => {
-                // Llamamos a nuestra función de lógica
-        getDataGallery()
+        // Llamamos a nuestra función de lógica
+        handleGetRoom()
+    }, []);
+
+    
+    function handleGetRoom() {
+        getRoom()
             .then((data) => setGalleryState(data)) //guardamos los datos recibidos en el estado
             .catch((error) => console.error("Error fetching posts:", error)); //mostramos el error
-    }, []);
+    }
 
     //variable para borrar elemento
     const deleteCard = function (idDel) {
@@ -42,15 +48,18 @@ function Gallery() {
 
     //funcion para añadir sala
 
-    function createNewRoom(packageGallery) {
 
-        let originalLenght = galleryState.length
-        packageGallery.id = ++originalLenght //añadimo +1 al ultimo id
+    async function createNewRoom(packageGallery) {
+        try {
+            const response = await createRoom(packageGallery)
 
-        let copy = [...galleryState]    //crea copia galleryState
-        copy.push(packageGallery)              //metemos los datos nuevos en copy, lo nuevo es Newroom 
-        setGalleryState(copy)           //Asignamos a setGallerystate el valor de copy
+            setShowFormCreate(false)
+            handleGetRoom()
+        }
+        catch (err) {
+            console.error("Create",err)
 
+        }
     }
 
     function updateRoom(updateIdRoom, packageGallery) {
@@ -76,7 +85,11 @@ function Gallery() {
             <h1 className="galeria-title">Salas de Exposición</h1>
             <div className="galeria-grid">
                 {galleryState.map(item => (
-                    <Room key={item.id} roomProp={item} onDelete={deleteCard} onUpdate={setRoomUpdate} />
+                    <Room
+                        key={item.id}
+                        roomProp={item}
+                        onDelete={deleteCard}
+                        onUpdate={setRoomUpdate} />
                 ))}
 
             </div>
