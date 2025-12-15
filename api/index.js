@@ -166,6 +166,97 @@ api.delete("/Room/:id", async (req, res) => {
         return res.status(500).json({ error: "DB_ERROR" });
     }
 });
+api.delete("/picture/:id", async (req, res) => {
+    try {
+        const pictureId = req.params.id;
+        const deletedPicture = await Picture.findByIdAndDelete(pictureId);
+        if (!deletedPicture) {
+            return res.status(404).json({ error: "POST_NOT_FOUND" });
+        }
+        return res.json(deletedPicture);
+    } catch (err) {
+        console.error("[ERROR] DELETE /posts/:id:", err);
+        return res.status(500).json({ error: "DB_ERROR" });
+    }
+});
+// Utilizamos el put para reemplazar o actualizar en el servidor
+api.put("/picture/:id", async (req, res) => {
+    try {
+        const pictureId = req.params.id; //extrae el número de id a modificar
+        const updateData = req.body;
+        const picture = await Picture.findById(pictureId);
+        // Si no encuentra la "picture por su id" devuelve error 404.
+        if (!picture) {
+            return res.status(404).json({ error: "POST_NOT_FOUND" });
+        }
+    picture.set(updateData);//aplica los cambios al documento
+
+    const updatedPicture = await picture.save();
+    return res.json(updatedPicture);
+    } catch (err) {
+    console.error("[ERROR] PUT /picture/:id", err);
+    return res.status(500).json({ error: "DB_ERROR" });
+    }
+});
+
+    
+
+    
+
+    
+
+
+
+
+
+
+api.delete("/Artist/:id", async (req, res) => {
+    try {
+        const artistId = req.params.id;
+
+        // Buscar y eliminar el post por su ID
+        const deletedArtist = await Artist.findByIdAndDelete(artistId);
+
+        // Si no se encuentra el post, devolver un error 404
+        if (!deletedArtist) {
+            return res.status(404).json({ error: "POST_NOT_FOUND" });
+        }
+
+        // Devolver el post eliminado
+        return res.json(deletedArtist);
+    } catch (err) {
+        console.error("[ERROR] DELETE /Artist/id:", err);
+        return res.status(500).json({ error: "DB_ERROR" });
+    }
+    
+});
+
+api.put("/Artist/:id", async (req, res) => {
+    try {
+        const artistId = req.params.id;
+        const updateData = req.body;
+
+        // Buscar el post por su ID
+        const artist = await Artist.findById(artistId);
+
+        // Si no se encuentra, 404
+        if (!artist) {
+            return res.status(404).json({ error: "ARTIST_NOT_FOUND" });
+        }
+
+        // Aplicar cambios recibidos al documento
+        artist.set(updateData);
+
+        // Guardar cambios en la base de datos
+        const updatedArtist = await artist.save();
+
+        // Devolver el post actualizado
+        return res.json(updatedArtist);
+    } catch (err) {
+        console.error("[ERROR] PUT /Artist/: id :", err);
+        return res.status(500).json({ error: "DB_ERROR" });
+    }
+});
 
 
 //---- PUT -------------------------------------------------------------------------------//

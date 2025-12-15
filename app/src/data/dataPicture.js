@@ -77,7 +77,7 @@ const dataPicture=[
     name: "Un sendero en el bosque",
     autor:  "Spok Brillor",
     año: 2014,
-    image: "src/img/Pepi/okuda-san-miguel 3.jpg",
+    image: "src/img/Pepi/spok_brillor1.jpg",
     description: "Un camino serpenteante bajo la densa vegetación de un bosque, con luz filtrada."
   },
   {  
@@ -85,7 +85,7 @@ const dataPicture=[
     name: "Un sendero en el bosque",
     autor:  "Spok Brillor",
     año: 2014,
-    image: "src/img/Pepi/okuda-san-miguel 3.jpg",
+    image: "src/img/Pepi/spok_brillor2.jpg",
     description: "Un camino serpenteante bajo la densa vegetación de un bosque, con luz filtrada."
   }
 ]
