@@ -69,7 +69,7 @@ function Gallery() {
             handleGetRoom()
         }
         catch (err) {
-
+            console.error("UPDATE", err)
         }
 
     }
