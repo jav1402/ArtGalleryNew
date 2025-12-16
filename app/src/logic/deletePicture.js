@@ -4,10 +4,10 @@ async function deletePicture(id) {
   return fetch(`${BASE_URL}/picture/${id}`, {
     method: "DELETE",
   })
-    .then((response) => response.json())
+    .then((response) => response.json)
     .catch((error) => {
-      console.error("Error deleting picutre:", error);
-    });
+        console.error("Error deleting picutre:", error);
+      });
 }
 
 export default deletePicture;

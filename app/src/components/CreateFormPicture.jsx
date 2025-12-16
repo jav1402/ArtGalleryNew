@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function createFormPicture({createNewPictureProps}) {
+function CreateFormPicture({ createNewPictureProps }) {
 
     const [namePicture, setNamePicture] = useState('')
     const [authorPicture, setAuthorPicture] = useState('')
@@ -14,7 +14,7 @@ function createFormPicture({createNewPictureProps}) {
             name: namePicture,
             author: authorPicture,
             year: yearPicture,
-            image: imagePicture,
+            imageUrl: imagePicture,
             description: descriptionPicture
         }
         createNewPictureProps(packagePicture)
@@ -22,7 +22,7 @@ function createFormPicture({createNewPictureProps}) {
     return (
 
         <div>
-            <form onSubmit={sendFormPicture}> 
+            <form onSubmit={sendFormPicture}>
                 <div className="Formulario">
                     <label> Nombre Obra</label>
                     <input
@@ -39,6 +39,7 @@ function createFormPicture({createNewPictureProps}) {
                 <div className="Formulario">
                     <label> Año</label>
                     <input
+                        type="number"
                         value={yearPicture} onChange={(event) => { setYearPicture(event.target.value) }}
                     />
                 </div>
@@ -60,5 +61,5 @@ function createFormPicture({createNewPictureProps}) {
     )
 }
 
-export default createFormPicture;
+export default CreateFormPicture;
 

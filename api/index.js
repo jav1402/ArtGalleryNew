@@ -87,7 +87,8 @@ api.get("/picture", async (req, res) => {
 //---- POST -------------------------------------------------------------------------------//
 
 // Ruta para crear una nueva publicación (post)
-// La petición POST se utiliza para enviar datos al servidor
+//Pe 
+// tición POST se utiliza para enviar datos al servidor
 
 
 //---- PICTURE --------------//
