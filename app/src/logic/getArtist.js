@@ -1,4 +1,4 @@
-async function getDataArtist() {
+async function getArtist() {
   // Hacemos la petición a la URL de TU servidor local
   return fetch("http://localhost:3000/Artist")
     .then((response) => response.json()) // 1. Recibimos respuesta y la convertimos a JSON
@@ -10,4 +10,4 @@ async function getDataArtist() {
       console.error("Error al obtener los datos:", error); // Gestión de errores
     });
 }
-export default getDataArtist
+export default getArtist
