@@ -6,7 +6,7 @@ function Navbar() {
         { to: "/artistas", label: "Artistas" },
         { to: "/exposicion", label: "Exposición" },
         { to: "/gallery", label: "Galería" },
-        { to: "/servicios", label: "Servicios" },
+        // { to: "/servicios", label: "Servicios" },
     ];
 
     return (

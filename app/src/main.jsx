@@ -16,6 +16,10 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
+        index: true,      // <-- esto hace que Home sea la ruta por defecto en '/'
+        element: <Home />
+      },
+      {
         path: '/home',
         element: <Home />
       },
@@ -31,10 +35,10 @@ const router = createBrowserRouter([
         path: '/gallery',
         element: <Gallery />
       },
-      {
-        path: '/servicios',
-        element: <Servicios />,
-      },
+      // {
+      //   path: '/servicios',
+      //   element: <Servicios />,
+      // },
     ]
   }
 ])

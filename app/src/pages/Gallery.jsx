@@ -35,7 +35,7 @@ function Gallery() {
             handleGetRoom()
         }
         catch (err) {
-            console.error("Create", err)
+            console.error("DELETE", err)
 
         }
     }

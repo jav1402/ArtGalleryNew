@@ -41,9 +41,9 @@ body {
 }
 
 .app-main {
-    width: 100vw;
+    width: 100%;
     background-color: rgba(98, 158, 255, 0.188);
-    min-height: 850px;
+    /* min-height: 850px; */
 
     /* width: 100%;
     max-width: 1100px; */
@@ -248,7 +248,7 @@ footer {
 
 /*------------------------HOME------------------------------*/
 .home {
-    width: 100vw;
+    width: 100%;
     /* ocupa todo el ancho de la ventana */
     height: 100vh;
     /* ocupa todo el alto */
