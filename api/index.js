@@ -149,10 +149,22 @@ api.post("/Room", async (req, res) => {
 
 //---- PICTURE --------------//
 
+api.delete("/picture/:id", async (req, res) => {
+    try {
+        const pictureId = req.params.id;
+        const deletedPicture = await Picture.findByIdAndDelete(pictureId);
+        if (!deletedPicture) {
+            return res.status(404).json({ error: "POST_NOT_FOUND" });
+        }
+        return res.json(deletedPicture);
+    } catch (err) {
+        console.error("[ERROR] DELETE /posts/:id:", err);
+        return res.status(500).json({ error: "DB_ERROR" });
+    }
+});
 
 
 //---- ARTIST --------------//
-
 api.delete("/Artist/:id", async (req, res) => {
     try {
         const artistId = req.params.id;
@@ -162,7 +174,7 @@ api.delete("/Artist/:id", async (req, res) => {
 
         // Si no se encuentra el post, devolver un error 404
         if (!deletedArtist) {
-            return res.status(404).json({ error: "POST_NOT_FOUND" });
+            return res.status(404).json({ error: "ARTIST_NOT_FOUND" });
         }
 
         // Devolver el post eliminado
@@ -173,6 +185,7 @@ api.delete("/Artist/:id", async (req, res) => {
     }
     
 });
+
 
 
 //---- ROOM --------------//
@@ -196,20 +209,25 @@ api.delete("/Room/:id", async (req, res) => {
         return res.status(500).json({ error: "DB_ERROR" });
     }
 });
-api.delete("/picture/:id", async (req, res) => {
-    try {
-        const pictureId = req.params.id;
-        const deletedPicture = await Picture.findByIdAndDelete(pictureId);
-        if (!deletedPicture) {
-            return res.status(404).json({ error: "POST_NOT_FOUND" });
-        }
-        return res.json(deletedPicture);
-    } catch (err) {
-        console.error("[ERROR] DELETE /posts/:id:", err);
-        return res.status(500).json({ error: "DB_ERROR" });
-    }
-});
+
+
+
+
+
+
+//---- PUT -------------------------------------------------------------------------------//
+
 // Utilizamos el put para reemplazar o actualizar en el servidor
+// Ruta para actualizar una publicación (post) por su ID
+// La petición PUT se utiliza para reemplazar/actualizar recursos en el servidor
+
+
+
+
+//---- PICTURE --------------//
+
+
+
 api.put("/picture/:id", async (req, res) => {
     try {
         const pictureId = req.params.id; //extrae el número de id a modificar
@@ -228,53 +246,6 @@ api.put("/picture/:id", async (req, res) => {
     return res.status(500).json({ error: "DB_ERROR" });
     }
 });
-
-    
-
-    
-
-    
-
-
-
-
-
-
-api.delete("/Artist/:id", async (req, res) => {
-    try {
-        const artistId = req.params.id;
-
-        // Buscar y eliminar el post por su ID
-        const deletedArtist = await Artist.findByIdAndDelete(artistId);
-
-        // Si no se encuentra el post, devolver un error 404
-        if (!deletedArtist) {
-            return res.status(404).json({ error: "POST_NOT_FOUND" });
-        }
-
-        // Devolver el post eliminado
-        return res.json(deletedArtist);
-    } catch (err) {
-        console.error("[ERROR] DELETE /Artist/id:", err);
-        return res.status(500).json({ error: "DB_ERROR" });
-    }
-    
-});
-
-
-
-
-//---- PUT -------------------------------------------------------------------------------//
-
-// Ruta para actualizar una publicación (post) por su ID
-// La petición PUT se utiliza para reemplazar/actualizar recursos en el servidor
-
-
-
-
-//---- PICTURE --------------//
-
-
 
 //---- ARTIST --------------//
 
