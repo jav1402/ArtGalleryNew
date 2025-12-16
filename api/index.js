@@ -70,6 +70,12 @@ api.get("/Room", async (req, res) => {
 api.get("/picture", async (req, res) => {
     try {
         const pictures = await Picture.find().lean();
+
+        pictures.forEach((picture) => {
+            picture.id = picture._id.toString()
+            delete picture._id
+        })
+
         res.json(pictures);
     } catch (err) {
         console.error("[ERROR] GET /picture:", err);
@@ -81,7 +87,8 @@ api.get("/picture", async (req, res) => {
 //---- POST -------------------------------------------------------------------------------//
 
 // Ruta para crear una nueva publicación (post)
-// La petición POST se utiliza para enviar datos al servidor
+//Pe 
+// tición POST se utiliza para enviar datos al servidor
 
 
 //---- PICTURE --------------//
