@@ -41,6 +41,10 @@ api.get("/", (req, res) => {
 api.get("/Artist", async (req, res) => {
     try {
         const artists = await Artist.find().lean();
+       artists.forEach((artist)=>{
+            artist.id = artist._id.toString()
+            delete artist._id
+        })
         res.json(artists);
     }
     catch (err) {
