@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-function CreateFormGallery({ createNewRoomProps }) {
+function createFormGallery({ createNewRoomProps }) {
 
     const [nameGallery, setNameGallery] = useState("")
     const [imageGallery, setImageGallery] = useState("")
@@ -49,4 +49,4 @@ function CreateFormGallery({ createNewRoomProps }) {
     )
 }
 
-export default CreateFormGallery
+export default createFormGallery
