@@ -1,58 +1,78 @@
 import Artist from "../components/Artist"
-import dataArtists from "../data/dataArtists.js"
 import { useState } from "react"
 import { useEffect } from "react";
-//import CreateFormArtist from "../components/CreateFormArtist";
-import getDataArtist from "../logic/GetDataArtist";
+import CreateFormArtist from "../components/CreateFormArtist.jsx"
+import getArtist from "../logic/getArtist.js"
+import createArtist from "../logic/createArtist.js";
+import deleteArtist from "../logic/deleteArtist.js";
+import updateArtist from "../logic/updateArtist.js";
 // este es el paso 3
 function Artistas() {
-    const [artistState, setArtistState] = useState(dataArtists);
+    const [showFormCreate, setShowFormCreate] = useState(false)
+    const [artistUpdate, setArtistUpdate] = useState(null)
+    const [artistState, setArtistState] = useState([]);
+
 
     useEffect(() => {
-        getDataArtist(dataArtists)
+        // Llamamos a nuestra función de lógica
+        handleGetArtist()
+    }, []);
+
+
+    function handleGetArtist() {
+        getArtist()
             .then((data) => setArtistState(data))
-            .catch((error) => console.error())
-    }, [])
-    //funcion para añadir picture
-    function createNewArtist(packageArtist) {
-        let originalLenght = artistState.length
-        packageArtist.id = ++originalLenght
-        let copy = [...artistState]
-        copy.push(packageArtist)
-        setArtistState(copy)
+            .catch((error) => console.error()); //mostramos el error
     }
-    const deleteArtist = (idDelArtist) => {
-        let index = -1;
-        let copy = [...artistState]
 
-        for (let i = 0; i < copy.length; i++) {
-            if (copy[i].id === idDeleteArtist) {
-                index = i
-            }
+    //funcion para añadir artista
+      async function createNewArtist(packageArtist) {
+        try {
+            const response = await createArtist(packageArtist)
+
+            setShowFormCreate(false)
+            handleGetArtist()
         }
-        if (index) {
-            copy.splice(index, 1)
-            setArtistState(copy)
+        catch (err) {
+            console.error("Create", err)
+
         }
+    }
+    
+    //variable para borrar elemento
+    async function handleDeleteArtist(idDel) {
+        try {
+            const response = await deleteArtist(idDel)
 
+            handleGetArtist()
+        }
+        catch (err) {
+            console.error("Delete", err)
+
+        }
     }
 
-    if (!artistState) {
-        return <div>Loading.... {JSON.stringify(dataArtists)}</div>
-    }
-
-    return (
-        <div>
-            <h1>Artistas</h1>
-            {artistState.map((dataArtistSingle) => {
-                return <Artist key={dataArtistSingle.id}
-                    artistProp={dataArtistSingle} onDelete={
-                        deleteArtist
-                    } />
-            })}
 
 
+        return (
+        <div className="Artistas-wrap">
+            <h1 className="Artistas-title">Artistas</h1>
+            <div className="Artistas-grid">
+                {artistState.map(item => (
+                    <Artist
+                        key={item.id}
+                        artistProp={item}
+                        onDelete={handleDeleteArtist}
+                        onUpdate={setArtistUpdate} />
+                ))}
+
+            </div>
+            {showFormCreate && <CreateFormArtist createNewArtistProps={createNewArtist} />} {/* Renderizado condicional  */}
+            <button onClick={() => setShowFormCreate(!showFormCreate)}>{!showFormCreate ? "Crear Nueva Artist" : "Cerrar Formulario"}</button>
+
+            {artistUpdate && <updateFormArtist updateNewArtistProps={handleUpdateArtist} oldArtistProps={artistUpdate} />} {/* Renderizado condicional  */}
+            {/* <button onClick={() => setShowFormCreate(!showFormCreate)}>{!showFormCreate ?"Actualizar Artist":"Cerrar Actualización"}</button> */}
         </div>
-    )
+    );
 }
-export default Artistas
+export default Artistas;

@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import CreateFormPicture from "../components/CreateFormPicture";
 import getPicture from "./../logic/getPicture"
 import createPicture from "../logic/createPicture";
-
-
+import deletedPicture from "../logic/deletePicture";
+import updatePicture from "../logic/updatePicture";
+import UpdateFormPicture from "../components/UpdateFormPicture";
 
 function Exposicion() {
     const [showFormCreate, setShowFormCreate] = useState(false)
@@ -26,22 +27,16 @@ function Exposicion() {
             .catch((error) => console.error("Error fetching pictures", error));
     }
 
-    //variable para borrar elemento
-    const deletePicture = (idDelPict) => {
-        let index = -1; //variable para meter datos 
-        let copy = [...picturesState] //crea copia pictureState
+    //función para borrar elemento
+    async function handleDeletePicture(idDel) {
+        try {
+            const response = await deletedPicture(idDel)
 
-        //creamos un bucle de la longitud de copy e incrementamos 1
-        for (let i = 0; i < copy.length; i++) {
-            if (copy[i].id === idDelPict)  //si el id  del elemento del array es igual a el id pasado por parametros(idDel)
-                index = i; //guardo el valor i en index
+            handleGetPicture()
         }
+        catch (err) {
+            console.error("Delete", err)
 
-        if (index !== -1) {  //si tengo index es que he encontrado el elemento
-            copy.splice(index, 1) // va a eliminar en la posicion del index un elemento
-            console.log(copy)
-            setPicturesState(copy) // asigno copy a setGalleryState con el elemento eliminado
-            console.log(picturesState)
         }
     }
 
@@ -63,52 +58,11 @@ function Exposicion() {
         try {
             const response = await updatePicture(updateIdPicture, packagePicture) //peticióbn y espera que conteste
             setPictureUpdate(null) //para formulario
-            handleGetPicture() //solicita toda las rooms
+            handleGetPicture() //solicita toda las pictures
         }
         catch (err) {
         }
     }
-
-    //función para modificar
-    function updatePicture(updateIdPicture, packagePicture) {
-        let index = -1;
-        let copy = [...picturesState]
-        //creamos un bucle de la longitud de copy e incrementamos 1
-        for (let i = 0; i < copy.length; i++) {
-            if (copy[i].id === idDelPict)  //si el id  del elemento del array es igual a el id pasado por parametros(idDel)
-                index = i; //guardo el valor i en index
-        }
-
-        if (index !== -1) {  //si tengo index es que he encontrado el elemento
-            copy.splice(index, 1, packagePicture) // va a eliminar en la posicion del index un elemento
-            console.log(copy)
-            setPicturesState(copy) // asigno copy a setGalleryState con el elemento eliminado
-            console.log(picturesState)
-        }
-        setPictureUpdate(null)
-    }
-
-
-
-
-    //funcion para añadir picture
-    /*function createNewPicture(event) {
-        event.preventDefault()
-        let originalLenght = picturesState.length
-        const newPicture = {
-            id: ++originalLenght,
-            name: namePicture,
-            autor: authorPicture,
-            año: yearPicture,
-            image: imagePicture,
-            description: descriptionPicture
-        }
-        console.log(newPicture)*/
-
-    /*let copy = [...picturesState]
-    copy.push(newPicture)
-    setPicturesState(copy)*/
-
 
 
     return (
@@ -119,7 +73,8 @@ function Exposicion() {
                     return <Picture
                         key={dataPictureSingle.id}
                         pictureProp={dataPictureSingle}
-                        onDelete={deletePicture} />
+                        onDelete={handleDeletePicture}
+                        onUpdate={setPictureUpdate} />
                 })}
             </div>
             <div>
@@ -127,7 +82,7 @@ function Exposicion() {
                 <button onClick={() => setShowFormCreate(!showFormCreate)}>{!showFormCreate ? "Crear Nueva Picture" : "Cerrar Formulario"}</button>
 
                 {pictureUpdate && <UpdateFormPicture updateNewPictureProps={handleUpdatePicture} oldPictureProps={pictureUpdate} />}  {/* Renderizado condicional */}
-
+                
             </div>
         </div>
 

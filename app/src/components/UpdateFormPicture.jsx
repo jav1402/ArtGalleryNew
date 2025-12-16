@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function  UpdateNewPictureProps({ UpdateNewPictureProps, oldPictureProps}){
+function UpdateNewPictureProps({ updateNewPictureProps, oldPictureProps}){
     
     const [namePicture, setNamePicture] = useState('')
     const [authorPicture, setAuthorPicture] = useState('')
@@ -27,7 +27,7 @@ function  UpdateNewPictureProps({ UpdateNewPictureProps, oldPictureProps}){
             image: imagePicture,
             description: descriptionPicture
         }
-        UpdateNewPictureProps(updateIdPicture, packagePicture)
+        updateNewPictureProps(oldPictureProps.id, packagePicture)
     }
     return (
 
