@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function CreateFormPicture({ createNewPictureProps }) {
+function CreateFormPicture({ createNewPictureProps, closeForm }) {
 
     const [namePicture, setNamePicture] = useState('')
     const [authorPicture, setAuthorPicture] = useState('')
@@ -51,6 +51,9 @@ function CreateFormPicture({ createNewPictureProps }) {
                     </div>
                 </div>
                 <button type="submit">Enviar</button>
+                 <button onClick={closeForm} className="btn btn-primary" type="button">
+                            Cerrar
+                        </button>        
             </form>
         </div>
     )
