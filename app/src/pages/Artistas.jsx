@@ -6,7 +6,9 @@ import getArtist from "../logic/getArtist.js"
 import createArtist from "../logic/createArtist.js";
 import deleteArtist from "../logic/deleteArtist.js";
 import updateArtist from "../logic/updateArtist.js";
+import UpdateFormArtist from "../components/UpdateFormArtist.jsx";
 // este es el paso 3
+
 function Artistas() {
     const [showFormCreate, setShowFormCreate] = useState(false)
     const [artistUpdate, setArtistUpdate] = useState(null)
@@ -26,7 +28,7 @@ function Artistas() {
     }
 
     //funcion para añadir artista
-      async function createNewArtist(packageArtist) {
+    async function createNewArtist(packageArtist) {
         try {
             const response = await createArtist(packageArtist)
 
@@ -38,7 +40,7 @@ function Artistas() {
 
         }
     }
-    
+
     //variable para borrar elemento
     async function handleDeleteArtist(idDel) {
         try {
@@ -51,10 +53,20 @@ function Artistas() {
 
         }
     }
+    //función para modificar elemento
+    async function handleUpdateArtist(updateIdArtist, packageArtist) {
+        try {
+            const response = await updateArtist(updateIdArtist, packageArtist)
 
+            setArtistUpdate(null) // Cierra el formulario de actualización
+            handleGetArtist() // Refresca la lista de artistas
+        }
+        catch (err) {
+            console.error("Update", err)
+        }
+    }
 
-
-        return (
+    return (
         <div className="Artistas-wrap">
             <h1 className="Artistas-title">Artistas</h1>
             <div className="Artistas-grid">
@@ -70,7 +82,7 @@ function Artistas() {
             {showFormCreate && <CreateFormArtist createNewArtistProps={createNewArtist} />} {/* Renderizado condicional  */}
             <button onClick={() => setShowFormCreate(!showFormCreate)}>{!showFormCreate ? "Crear Nueva Artist" : "Cerrar Formulario"}</button>
 
-            {artistUpdate && <updateFormArtist updateNewArtistProps={handleUpdateArtist} oldArtistProps={artistUpdate} />} {/* Renderizado condicional  */}
+            {artistUpdate && <UpdateFormArtist updateNewArtistProps={handleUpdateArtist} oldArtistProps={artistUpdate} />} {/* Renderizado condicional  */}
             {/* <button onClick={() => setShowFormCreate(!showFormCreate)}>{!showFormCreate ?"Actualizar Artist":"Cerrar Actualización"}</button> */}
         </div>
     );
