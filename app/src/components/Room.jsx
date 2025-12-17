@@ -27,15 +27,3 @@ export default function Room({ roomProp, onDelete, onUpdate }) {
         </article>
     );
 }
-
-
-// <div className="room">
-//     <p>{id}</p>
-//     <p>{name}</p>
-//     <img src={image} alt="" />
-//     <p>{description}</p>
-// </div>
-//     )
-// }
-
-

@@ -6,22 +6,34 @@ function Picture({ pictureProp, onDelete, onUpdate }) {
     const [show, setShow] = useState(true)
 
     return (
+
         <div className="card-picture">
             <div className="picture-image">
-                <p>{name}</p>
-                <p>{autor}</p>
+                {autor}
                 <img className="img-picture" src={image} alt="cuadro" />
-                <p>{description}</p>
+                {description}
             </div>
-            {show && <button onClick={() => onDelete(id)}>Eliminar</button>} {/* Renderizado condicional  */}
-            <button onClick={() => setShow(!show)}>Show</button>
-            <button onClick={() => onUpdate(pictureProp)}>Actualizar Picture</button>
-        </div>
+            <div className="picture-body">
+                <h2 className="picture-name">{name}</h2>
+                <p className="picture-desc">{description}</p>
 
+                <div className="picture-actions">
+                    {show && (
+                        <button className="btn btn-danger" onClick={() => onDelete(id)}>
+                            Eliminar
+                        </button>
+                    )} {/* Renderizado condicional */} {/* [web:21] */}
+
+                    <button className="btn btn-secondary" onClick={() => setShow(!show)}>
+                        Show
+                    </button> {/* Toggle true/false */} {/* [web:68] */}
+
+                    <button className="btn btn-primary" onClick={() => onUpdate(pictureProp)}>
+                        Actualizar picture
+                    </button>
+                </div>
+            </div> 
+    </div>
     )
-
-
-
 }
-
-export default Picture
+            export default Picture

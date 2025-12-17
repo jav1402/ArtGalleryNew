@@ -67,7 +67,7 @@ function Exposicion() {
 
     return (
         <div className="main-exposiciones">
-            <h1>Pictures</h1>
+            <h1 className="picture-title">Pictures</h1>
             <div className="picture-grid">
                 {picturesState.map((dataPictureSingle) => {
                     return <Picture
@@ -77,13 +77,26 @@ function Exposicion() {
                         onUpdate={setPictureUpdate} />
                 })}
             </div>
-            <div>
-                {showFormCreate && <CreateFormPicture createNewPictureProps={createNewPicture} />} {/* Renderizado condicional */}
-                <button onClick={() => setShowFormCreate(!showFormCreate)}>{!showFormCreate ? "Crear Nueva Picture" : "Cerrar Formulario"}</button>
+            <div className="picture-actions">
+                <button
+                    className={!showFormCreate ? "btn btn-primary" : "btn btn-ghost"}
+                    onClick={() => setShowFormCreate(!showFormCreate)}
+                >
+                    {!showFormCreate ? "Crear Nueva Picture" : "Cerrar Formulario"}
+                </button>
 
-                {pictureUpdate && <UpdateFormPicture updateNewPictureProps={handleUpdatePicture} oldPictureProps={pictureUpdate} />}  {/* Renderizado condicional */}
-                
+                {showFormCreate && (
+                    <CreateFormPicture createNewPictureProps={createNewPicture} />
+                )}
+
+                {pictureUpdate && (
+                    <UpdateFormPicture
+                        updateNewPictureProps={handleUpdatePicture}
+                        oldPictureProps={pictureUpdate}
+                    />
+                )}
             </div>
+
         </div>
 
 
