@@ -91,13 +91,12 @@ function Gallery() {
                 <button
                     className={!showFormCreate ? "btn btn-primary" : "btn btn-ghost"}
                     onClick={() => setShowFormCreate(!showFormCreate)}
-                >
-                    {!showFormCreate ? "Crear Nueva Room" : "Cerrar Formulario"}
+                > Crear Nueva Room
                 </button>
             </div>
 
             {showFormCreate && (
-                <CreateFormGallery createNewRoomProps={createNewRoom} />
+                <CreateFormGallery createNewRoomProps={createNewRoom} closeForm={()=>{setShowFormCreate(false)}}/>
             )} {/* Renderizado condicional */}
 
             {roomUpdate && (
