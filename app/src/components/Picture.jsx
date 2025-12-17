@@ -3,7 +3,7 @@ import { useState } from "react";
 function Picture({ pictureProp, onDelete, onUpdate }) {
     const { id, name, autor, image, description } = pictureProp;
 
-    const [show, setShow] = useState(true)
+   // const [show, setShow] = useState(true)
 
     return (
 
@@ -18,13 +18,13 @@ function Picture({ pictureProp, onDelete, onUpdate }) {
                 <p className="picture-desc">{description}</p>
 
                 <div className="picture-actions">
-                    {show && (
+                     
                         <button className="btn btn-danger" onClick={() => onDelete(id)}>
                             Eliminar
                         </button>
-                    )} {/* Renderizado condicional */} {/* [web:21] */}
+                    {/* Renderizado condicional */} {/* [web:21] */}
 
-                    <button className="btn btn-secondary" onClick={() => setShow(!show)}>
+                    {/*<button className="btn btn-secondary" onClick={() => setShow(!show)}>
                         Show
                     </button> {/* Toggle true/false */} {/* [web:68] */}
 

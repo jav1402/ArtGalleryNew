@@ -31,7 +31,7 @@ function UpdateNewPictureProps({ updateNewPictureProps, oldPictureProps}){
     }
     return (
 
-    <div>
+    <div className="popup-form">
         <form onSubmit={sendFormPicture}>
             <div className="Formulario">
                 <label> Nombre Obra</label>

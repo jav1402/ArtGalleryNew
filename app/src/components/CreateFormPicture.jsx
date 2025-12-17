@@ -21,39 +21,34 @@ function CreateFormPicture({ createNewPictureProps }) {
     }
     return (
 
-        <div>
+        <div className="form-card-picture">
             <form onSubmit={sendFormPicture}>
-                <div className="Formulario">
+                <div className="field-label-pìcture">
                     <label> Nombre Obra</label>
-                    <input
+                    <input className="cell_form"
                         value={namePicture} onChange={(event) => { setNamePicture(event.target.value) }}
                     />
-                </div>
-
-                <div className="Formulario">
-                    <label> Autor</label>
-                    <input
-                        value={authorPicture} onChange={(event) => { setAuthorPicture(event.target.value) }}
-                    />
-                </div>
-                <div className="Formulario">
-                    <label> Año</label>
-                    <input
-                        type="number"
-                        value={yearPicture} onChange={(event) => { setYearPicture(event.target.value) }}
-                    />
-                </div>
-                <div className="Formulario">
-                    <label> Imagen</label>
-                    <input
-                        value={imagePicture} onChange={(event) => { setImagePicture(event.target.value) }}
-                    />
-                </div>
-                <div className="Formulario">
-                    <label> Descripción</label>
-                    <input
+                    <div><label> Autor</label>
+                        <input className="cell_form"
+                            value={authorPicture} onChange={(event) => { setAuthorPicture(event.target.value) }}
+                        />
+                    </div>
+                    <div><label> Año</label>
+                        <input className="cell_form"
+                            type="number"
+                            value={yearPicture} onChange={(event) => { setYearPicture(event.target.value) }}
+                        />
+                    </div>
+                    <div><label> Imagen</label>
+                        <input className="cell_form"
+                            value={imagePicture} onChange={(event) => { setImagePicture(event.target.value) }}
+                        />
+                    </div>
+                    <div><label> Descripción</label>
+                    <input className="cell_form"
                         value={descriptionPicture} onChange={(event) => { setDescriptionPicture(event.target.value) }}
                     />
+                    </div>
                 </div>
                 <button type="submit">Enviar</button>
             </form>
