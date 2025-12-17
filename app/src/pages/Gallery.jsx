@@ -86,11 +86,26 @@ function Gallery() {
                 ))}
 
             </div>
-            {showFormCreate && <CreateFormGallery createNewRoomProps={createNewRoom} />} {/* Renderizado condicional  */}
-            <button onClick={() => setShowFormCreate(!showFormCreate)}>{!showFormCreate ? "Crear Nueva Room" : "Cerrar Formulario"}</button>
 
-            {roomUpdate && <UpdateFormGallery updateNewRoomProps={handleUpdateRoom} oldRoomProps={roomUpdate} />} {/* Renderizado condicional  */}
-            {/* <button onClick={() => setShowFormCreate(!showFormCreate)}>{!showFormCreate ?"Actualizar Room":"Cerrar Actualización"}</button> */}
+            <div className="gallery-actions">
+                <button
+                    className={!showFormCreate ? "btn btn-primary" : "btn btn-ghost"}
+                    onClick={() => setShowFormCreate(!showFormCreate)}
+                >
+                    {!showFormCreate ? "Crear Nueva Room" : "Cerrar Formulario"}
+                </button>
+            </div>
+
+            {showFormCreate && (
+                <CreateFormGallery createNewRoomProps={createNewRoom} />
+            )} {/* Renderizado condicional */}
+
+            {roomUpdate && (
+                <UpdateFormGallery
+                    updateNewRoomProps={handleUpdateRoom}
+                    oldRoomProps={roomUpdate}
+                />
+            )} {/* Renderizado condicional */}
         </div>
     );
 }

@@ -18,35 +18,53 @@ function createFormGallery({ createNewRoomProps }) {
         createNewRoomProps(packageGallery)
     }
     return (
+        <section className="form-card">
+            <header className="form-card__header">
+                <h2 className="form-card__title">Crear nueva sala</h2>
+                <p className="form-card__subtitle">
+                    Rellena los campos y pulsa “Crear”.
+                </p>
+            </header>
 
-        <div>
-            <form onSubmit={sendFormGallery}>
-                <div className="form">
-                    <label>Nombre de la Galería</label>
+            <form className="form-grid" onSubmit={sendFormGallery}>
+                <label className="field">
+                    <span className="field__label">Nombre de la sala</span>
                     <input
-
-                        value={nameGallery} onChange={(event) => { setNameGallery(event.target.value) }}
+                        className="field__input"
+                        placeholder="Ej: Sala polivalente"
+                        value={nameGallery}
+                        onChange={(e) => setNameGallery(e.target.value)}
                     />
-                </div>
-                <div className="form">
-                    <label>Imagen de la Galería</label>
+                </label>
+
+                <label className="field">
+                    <span className="field__label">Imagen (URL)</span>
                     <input
-
-                        value={imageGallery} onChange={(event) => { setImageGallery(event.target.value) }}
+                        className="field__input"
+                        placeholder="https://..."
+                        value={imageGallery}
+                        onChange={(e) => setImageGallery(e.target.value)}
                     />
-                </div>
-                <div className="form">
-                    <label>Descripción de la Galería</label>
-                    <input
+                </label>
 
-                        value={descriptionGallery} onChange={(event) => { setDescriptionGallery(event.target.value) }}
+                <label className="field">
+                    <span className="field__label">Descripción</span>
+                    <textarea
+                        className="field__input field__textarea"
+                        placeholder="Ej: Sala polivalente de 250m2..."
+                        value={descriptionGallery}
+                        onChange={(e) => setDescriptionGallery(e.target.value)}
                     />
+                </label>
+
+                <div className="form-actions">
+                    <button className="btn btn-primary" type="submit">
+                        Crear
+                    </button>
                 </div>
-                <button type="submit">Enviar</button>
             </form>
-        </div>
-
-    )
+        </section>
+    );
 }
 
-export default createFormGallery
+export default createFormGallery;

@@ -41,6 +41,8 @@ body {
 }
 
 .app-main {
+    flex: 1;
+    /* ocupa el espacio y empuja el footer abajo */
     width: 100%;
     background-color: rgba(98, 158, 255, 0.188);
     /* min-height: 850px; */
@@ -52,6 +54,7 @@ body {
     /* padding: 0 16px; */
 }
 
+
 /* navbar.css */
 .navbar {
     position: fixed;
@@ -61,7 +64,6 @@ body {
     height: auto;
     display: flex;
     align-items: center;
-    justify-content: center;
     justify-content: space-between;
     padding: 0px 16px;
     background: rgba(255, 255, 255, 0.974);
@@ -105,14 +107,11 @@ body {
 
 .nav-link:hover {
     background: #eef2ff;
-    /* Azul muy claro al pasar */
     border-color: rgba(37, 99, 235, .25);
-    /* Borde azul suave */
 }
 
 .nav-link.active {
     background: #e0e7ff;
-    /* Estado activo simple */
     border-color: rgba(37, 99, 235, .45);
     color: var(--brand);
 }
@@ -122,46 +121,115 @@ body {
     width: auto;
 }
 
-/*JAVI------------------------------------------------------------------*/
-/* gallery.css */
-.galeria-wrap {
+/* ===== HAMBURGUESA (NUEVO) ===== */
+.hamburger {
+    display: none;
+    /* desktop: oculto */
+    border: 1px solid rgba(0, 0, 0, .1);
+    background: white;
+    border-radius: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
 
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        /* header arriba + menú debajo */
+        align-items: stretch;
+        padding: 8px 16px;
+    }
+
+    .navbar-inner {
+        max-width: none;
+        /* quita límite en móvil */
+        width: 100%;
+        justify-content: flex-start;
+        gap: 12px;
+        padding: 0;
+    }
+
+    .hamburger {
+        display: inline-flex;
+        margin-left: auto;
+        /* lo empuja a la derecha */
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-links {
+        display: none;
+        /* cerrado por defecto */
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px 0;
+    }
+
+    .nav-links.is-open {
+        display: flex;
+        /* abierto */
+    }
+
+    .nav-link {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+
+/*JAVI------------------------------------------------------------------*/
+
+/* gallery.css */
+
+.gallery-actions {
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    /* o flex-start si lo quieres a la izquierda */
+}
+
+.galeria-wrap {
     max-width: 1100px;
-    margin: 80px auto 32px;
+    margin: 88px auto 32px;
     padding: 0 16px;
 }
 
 .galeria-title {
     font-size: clamp(28px, 3vw, 40px);
     text-align: center;
-    margin: 0 0 18px;
+    margin: 0 0 22px;
     color: #1f2937;
 }
 
 .galeria-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-    align-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+    align-items: stretch;
+    /* tarjetas “estiran” en altura */
 }
 
 /* room.css */
-
 .room-card {
     background: var(--card);
     border: 1px solid rgba(0, 0, 0, .06);
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow);
-    height: 450px;
+    display: flex;
+    flex-direction: column;
+    /* imagen arriba, body debajo */
+    min-height: 420px;
 }
 
 .room-image-wrap {
     position: relative;
-    aspect-ratio: 16/10;
-    /* Mantiene proporción de cabecera */
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    /* recorta lo que sobresale */
     background: #f3f4f6;
-    /* Color de fondo por si tarda la imagen */
+    flex: 0 0 auto;
 }
 
 .room-image {
@@ -172,19 +240,179 @@ body {
 }
 
 .room-body {
-    padding: 12px 14px 14px;
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    /* ocupa el espacio restante para empujar acciones abajo */
 }
 
 .room-name {
-    margin: 0 0 6px;
-    font-weight: 600;
+    margin: 0;
+    font-weight: 650;
     font-size: 18px;
+    line-height: 1.2;
+
+    /* título máximo 2 líneas */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    /*limita el texto a 2 líneas y el contenido sobrante se oculta*/
+    overflow: hidden;
 }
 
 .room-desc {
     margin: 0;
     color: var(--muted);
     font-size: 14.5px;
+    line-height: 1.35;
+
+    /* descripción máximo 3 líneas */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    /*indica que el “box” se apila en vertical*/
+    -webkit-line-clamp: 3;
+    /*limita el texto a 3 líneas y el contenido sobrante se oculta*/
+    overflow: hidden;
+}
+
+/* ayuda a alinear los botones */
+.room-actions {
+    margin-top: auto;
+    /* empuja la botonera hacia abajo */
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* estilo base para botones dentro de la card  */
+.btn {
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, .12);
+    font-weight: 650;
+    cursor: pointer;
+    transition: transform .08s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn-primary {
+    background: #2563eb;
+    color: #fff;
+    border-color: rgba(37, 99, 235, .35);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 10px 22px rgba(37, 99, 235, .18);
+}
+
+.btn-danger {
+    background: #fff;
+    color: #b91c1c;
+    border-color: rgba(185, 28, 28, .25);
+}
+
+.btn-danger:hover {
+    background: rgba(185, 28, 28, .06);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: rgba(0, 0, 0, .18);
+}
+
+.btn-ghost:hover {
+    background: rgba(0, 0, 0, .04);
+}
+
+/*FORMULARIO DE ENVIO NUEVA ROOM*/
+
+.form-card {
+    margin-top: 14px;
+    background: rgba(255, 255, 255, .85);
+    border: 1px solid rgba(0, 0, 0, .08);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 16px;
+}
+
+.form-card__header {
+    margin-bottom: 12px;
+}
+
+.form-card__title {
+    margin: 0;
+    font-size: 18px;
+}
+
+.form-card__subtitle {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.form-grid {
+    display: grid;
+    gap: 12px;
+}
+
+.field {
+    display: grid;
+    gap: 6px;
+}
+
+.field__label {
+    font-size: 13px;
+    color: rgba(17, 24, 39, .8);
+    font-weight: 650;
+}
+
+.field__input {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, .12);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 14.5px;
+    outline: none;
+    background: white;
+}
+
+.field__input:focus {
+    border-color: rgba(37, 99, 235, .45);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .12);
+}
+
+.field__textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+/* Mobile */
+@media (max-width: 520px) {
+    .galeria-wrap {
+        padding: 0 12px;
+    }
+
+    .galeria-grid {
+        gap: 14px;
+    }
+
+    .room-card {
+        min-height: 0;
+    }
+
+    /* deja que en móvil sea más compacto */
 }
 
 
@@ -235,13 +463,13 @@ body {
 footer {
     background: rgba(255, 255, 255, 0.974);
     backdrop-filter: blur(6px);
-    border-bottom: 1px solid rgba(0, 0, 0, .06);
+    border-top: 1px solid rgba(0, 0, 0, .06);
     width: 100%;
-    height: 50px;
+    height: auto;
     align-items: center;
     margin: 0px;
-    padding: 10px 20px;
-    position: fixed;
+    padding: 12px 20px;
+    position: static;
     bottom: 0;
     left: 0;
     z-index: 100;

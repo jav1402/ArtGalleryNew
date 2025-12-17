@@ -26,7 +26,7 @@ function Artistas() {
     }
 
     //funcion para añadir artista
-      async function createNewArtist(packageArtist) {
+    async function createNewArtist(packageArtist) {
         try {
             const response = await createArtist(packageArtist)
 
@@ -38,7 +38,7 @@ function Artistas() {
 
         }
     }
-    
+
     //variable para borrar elemento
     async function handleDeleteArtist(idDel) {
         try {
@@ -54,7 +54,7 @@ function Artistas() {
 
 
 
-        return (
+    return (
         <div className="Artistas-wrap">
             <h1 className="Artistas-title">Artistas</h1>
             <div className="Artistas-grid">
