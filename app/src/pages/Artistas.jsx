@@ -80,6 +80,7 @@ function Artistas() {
                 ))}
 
             </div>
+<<<<<<< HEAD
 
             <div className="artist-actions">
                 <button
@@ -103,6 +104,28 @@ function Artistas() {
                     oldArtistProps={artistUpdate}
                 />
             )} {/* Renderizado condicional */}
+=======
+            <div className="artist-actions">
+                <button
+                    className={!showFormCreate ? "btn btn-primary" : "btn btn-ghost"}
+                    onClick={() => setShowFormCreate(!showFormCreate)}
+                >
+                    {!showFormCreate ? "Crear Nueva Artist" : "Cerrar Formulario"}
+                </button>
+
+                {showFormCreate && (
+                    <CreateFormArtist createNewArtistProps={createNewArtist} />
+                )} {/* Renderizado condicional */} {/* [web:21] */}
+
+                {artistUpdate && (
+                    <UpdateFormArtist
+                        updateNewArtistProps={handleUpdateArtist}
+                        oldArtistProps={artistUpdate}
+                    />
+                )} {/* Renderizado condicional */} {/* [web:21] */}
+            </div>
+
+>>>>>>> 913938ea6ad9ec9682946ba260b80a2ffd62334c
         </div>
     );
 };

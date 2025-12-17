@@ -82,26 +82,25 @@ function Exposicion() {
                     className={!showFormCreate ? "btn btn-primary" : "btn btn-ghost"}
                     onClick={() => setShowFormCreate(!showFormCreate)}
                 >
-                    {!showFormCreate ? "Crear Nueva Picture" : "Cerrar Formulario"}
+                Crear Nueva Picture 
                 </button>
-
-                {showFormCreate && (
-                    <CreateFormPicture createNewPictureProps={createNewPicture} />
-                )}
-
-                {pictureUpdate && (
-                    <UpdateFormPicture
-                        updateNewPictureProps={handleUpdatePicture}
-                        oldPictureProps={pictureUpdate}
-                    />
-                )}
             </div>
-
+            {showFormCreate && (
+                <CreateFormPicture
+                    createNewPictureProps={createNewPicture}
+                    closeForm={() => { setShowFormCreate(false); }}
+                />
+            )} {/* Renderizado condicional */} {/* [web:21] */}
+            {pictureUpdate && (
+                <UpdateFormPicture
+                    updateNewPictureProps={handleUpdatePicture}
+                    oldPictureProps={pictureUpdate}
+                />
+            )} {/* Renderizado condicional */}
         </div>
-
-
     );
-}
+};
+
 
 export default Exposicion;
 

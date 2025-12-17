@@ -11,10 +11,23 @@ function Artist({ artistProp, onDelete, onUpdate }) {
     const { id, name, description, image } = artistProp;
     // Todo lo que pongamos dentro de return es lo que se va a mostrar en la pantalla.
     return (
+<<<<<<< HEAD
     <div className="artist-card">
       <div className="artistas-image-wrap">
         <img src={image} alt={name} className="artist-image" />
       </div>
+=======
+        // Este div es la caja que envuelve toda la tarjeta del artista.
+        <div className="artist-card">
+            <div className="Artist-image-wrap"> </div>
+            <div className="artist-image">
+                {/* La etiqueta img mostrará la imagen usando la url que viene en la propiedad image.
+                    El atributo alt es para accesibilidad, describe la imagen si no se carga o para lectores de pantalla. */}
+                <img src={image} alt="Artistas" className="artist-image" />
+            </div>
+            <div className="artist-body">
+                {/* <p>{id}</p>*/}
+>>>>>>> 913938ea6ad9ec9682946ba260b80a2ffd62334c
 
       <div className="artist-body">
         {/* <p>{id}</p> */}
