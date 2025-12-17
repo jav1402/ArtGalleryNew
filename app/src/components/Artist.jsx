@@ -11,12 +11,6 @@ function Artist({ artistProp, onDelete, onUpdate }) {
     const { id, name, description, image } = artistProp;
     // Todo lo que pongamos dentro de return es lo que se va a mostrar en la pantalla.
     return (
-<<<<<<< HEAD
-    <div className="artist-card">
-      <div className="artistas-image-wrap">
-        <img src={image} alt={name} className="artist-image" />
-      </div>
-=======
         // Este div es la caja que envuelve toda la tarjeta del artista.
         <div className="artist-card">
             <div className="Artist-image-wrap"> </div>
@@ -27,25 +21,25 @@ function Artist({ artistProp, onDelete, onUpdate }) {
             </div>
             <div className="artist-body">
                 {/* <p>{id}</p>*/}
->>>>>>> 913938ea6ad9ec9682946ba260b80a2ffd62334c
 
-      <div className="artist-body">
-        {/* <p>{id}</p> */}
-        <p className="artist-name">{name}</p>
-        <p className="artist-desc">{description}</p>
+                <div className="artist-body">
+                    {/* <p>{id}</p> */}
+                    <p className="artist-name">{name}</p>
+                    <p className="artist-desc">{description}</p>
 
-        <div className="room-actions">
-          <button className="btn btn-danger" onClick={() => onDelete(id)}>
-            Eliminar
-          </button>
+                    <div className="room-actions">
+                        <button className="btn btn-danger" onClick={() => onDelete(id)}>
+                            Eliminar
+                        </button>
 
-          <button className="btn btn-primary" onClick={() => onUpdate(artistProp)}>
-            Actualizar Artist
-          </button>
+                        <button className="btn btn-primary" onClick={() => onUpdate(artistProp)}>
+                            Actualizar Artist
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+            );
 }
 
-export default Artist;
+            export default Artist;
