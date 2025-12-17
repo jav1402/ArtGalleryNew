@@ -22,23 +22,23 @@ function CreateFormArtist({ createNewArtistProps }) {
 
         <div>
             <form onSubmit={sendFormArtist}>
-                <div className="form">
+                <div className="field__label">
                     <label> Nombre del Artista </label>
-                    <input
+                    <input className="cell_form"
 
                         value={nameArtist} onChange={(event) => { setNameArtist(event.target.value) }}
                     />
                 </div>
-                <div className="form">
+                <div className="field__label">
                     <label>Imagen del Artista </label>
-                    <input
+                    <input className="cell_form"
 
                         value={imageArtist} onChange={(event) => { setImageArtist(event.target.value) }}
                     />
                 </div>
-                <div className="form">
+                <div className="field__label">
                     <label>Descripción del Artista </label>
-                    <input
+                    <input className="cell_form"
 
                         value={descriptionArtist} onChange={(event) => { setDescriptionArtist(event.target.value) }}
                     />
