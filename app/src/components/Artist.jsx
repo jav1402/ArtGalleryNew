@@ -13,9 +13,9 @@ function Artist({ artistProp, onDelete, onUpdate }) {
     return (
         // Este div es la caja que envuelve toda la tarjeta del artista.
         <div className="artist-card">
-
+            <div className="Artist-image-wrap"> </div>
             <div className="artist-image">
-                ¨{/* La etiqueta img mostrará la imagen usando la url que viene en la propiedad image.
+                {/* La etiqueta img mostrará la imagen usando la url que viene en la propiedad image.
                     El atributo alt es para accesibilidad, describe la imagen si no se carga o para lectores de pantalla. */}
                 <img src={image} alt="Artistas" className="artist-image" />
             </div>
@@ -24,7 +24,7 @@ function Artist({ artistProp, onDelete, onUpdate }) {
 
                 <p className="artist-name">{name}</p>
                 {/* La descripción del artista */}
-                <p>{description}</p>
+                <p className="artist-desc">{description}</p>
 
             </div>
             <button onClick={() => onDelete(id)}>Eliminar</button>
