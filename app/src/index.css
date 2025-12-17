@@ -522,28 +522,92 @@ body {
     flex-wrap: wrap;
 }
 /*NURIA------------------------------------------------------------------------------*/
-.Artistas-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-    align-items: start;
-}
-.artist-name{
-    margin: 0 0 6px;
-    font-weight: 600;
-    font-size: 18px;
+
+.Artistas-wrap {
+    max-width: 1100px;
+    margin: 88px auto 32px;
+    padding: 0 16px;
 }
 
+.Artistas-title {
+    font-size: clamp(28px, 3vw, 40px);
+    text-align: center;
+    margin: 0 0 22px;
+    color: #1f2937;
+}
+
+.Artistas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+    align-items: stretch;
+    /* tarjetas “estiran” en altura */
+}
+.artist-card {
+    background: var(--card);
+    border: 1px solid rgba(0, 0, 0, .06);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    /* imagen arriba, body debajo */
+    min-height: 420px;
+}
+
+.artistas-image-wrap {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    /* recorta lo que sobresale */
+    background: #f3f4f6;
+    flex: 0 0 auto;
+}
 
 .artist-image {
     width: 100%;
     height: 100%;
     display: block;
     object-fit: cover;
-    }
+}
 
+.artist-body {
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    /* ocupa el espacio restante para empujar acciones abajo */
+}
 
+.artist-name {
+    margin: 0;
+    font-weight: 650;
+    font-size: 18px;
+    line-height: 1.2;
 
+    /* título máximo 2 líneas */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    /*limita el texto a 2 líneas y el contenido sobrante se oculta*/
+    overflow: hidden;
+}
+
+.artist-desc {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.35;
+
+    /* descripción máximo 3 líneas */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    /*indica que el “box” se apila en vertical*/
+    -webkit-line-clamp: 3;
+    /*limita el texto a 3 líneas y el contenido sobrante se oculta*/
+    overflow: hidden;
+}
 
 
 
