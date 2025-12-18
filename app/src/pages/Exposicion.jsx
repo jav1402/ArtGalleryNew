@@ -67,7 +67,7 @@ function Exposicion() {
 
     return (
         <div className="main-exposiciones">
-            <h1 className="picture-title">Pictures</h1>
+            <h1 className="picture-title">EXPOSICIONES</h1>
             <div className="picture-grid">
                 {picturesState.map((dataPictureSingle) => {
                     return <Picture
