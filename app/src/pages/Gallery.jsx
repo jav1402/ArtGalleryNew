@@ -103,6 +103,7 @@ function Gallery() {
                 <UpdateFormGallery
                     updateNewRoomProps={handleUpdateRoom}
                     oldRoomProps={roomUpdate}
+                    closeForm={() => setRoomUpdate(false)}
                 />
             )} {/* Renderizado condicional */}
         </div>
