@@ -82,7 +82,7 @@ function Exposicion() {
                     className={!showFormCreate ? "btn btn-primary" : "btn btn-ghost"}
                     onClick={() => setShowFormCreate(!showFormCreate)}
                 >
-                Crear Nueva Picture 
+                    Crear Nueva Picture
                 </button>
             </div>
             {showFormCreate && (
@@ -91,10 +91,13 @@ function Exposicion() {
                     closeForm={() => { setShowFormCreate(false); }}
                 />
             )} {/* Renderizado condicional */} {/* [web:21] */}
+
             {pictureUpdate && (
                 <UpdateFormPicture
                     updateNewPictureProps={handleUpdatePicture}
                     oldPictureProps={pictureUpdate}
+                    closeForm={() => setPictureUpdate(false)}  // o false, según tu estado
+
                 />
             )} {/* Renderizado condicional */}
         </div>

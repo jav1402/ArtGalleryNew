@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function UpdateFormGallery({ updateNewRoomProps, oldRoomProps }) {
+function UpdateFormGallery({ updateNewRoomProps, oldRoomProps, closeForm, sendForm }) {
 
     const [nameGallery, setNameGallery] = useState("")
     const [imageGallery, setImageGallery] = useState("")
@@ -29,6 +29,7 @@ function UpdateFormGallery({ updateNewRoomProps, oldRoomProps }) {
     return (
 
         <div>
+            <div className="form-card-picture">
             <form onSubmit={sendFormGallery}>
                 <div className="form">
                     <label>Nombre de la Galería</label>
@@ -50,11 +51,16 @@ function UpdateFormGallery({ updateNewRoomProps, oldRoomProps }) {
 
                         value={descriptionGallery} onChange={(event) => { setDescriptionGallery(event.target.value) }}
                     />
-                </div>
-                <button type="submit">Enviar</button>
+                </div >
+                <div className="form-actions">
+
+                    <button button onClick={sendForm} className="btn btn-primary" type="submit">Enviar</button>
+                    <button onClick={closeForm} className="btn btn-primary" type="button">
+                        Cerrar
+                    </button> </div>
             </form>
         </div>
-
+</div>
     )
 }
 

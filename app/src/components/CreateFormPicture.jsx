@@ -50,10 +50,11 @@ function CreateFormPicture({ createNewPictureProps, closeForm, sendForm }) {
                         />
                     </div>
                 </div>
-                <button onClick={sendForm} className="btn btn-primary" type="submit"> Enviar</button>
-                <button onClick={closeForm} className="btn btn-primary" type="button">
-                    Cerrar
-                </button>
+                <div className="form-actions">
+                    <button onClick={sendForm} className="btn btn-primary" type="submit"> Enviar</button>
+                    <button onClick={closeForm} className="btn btn-primary" type="button">
+                        Cerrar
+                    </button></div>
             </form>
         </div>
     )
