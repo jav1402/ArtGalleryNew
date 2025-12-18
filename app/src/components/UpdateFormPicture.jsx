@@ -12,7 +12,7 @@ function UpdateNewPictureProps({ updateNewPictureProps, oldPictureProps, closeFo
         setNamePicture(oldPictureProps.name)
         setAuthorPicture(oldPictureProps.author)
         setYearPicture(oldPictureProps.year)
-        setImagePicture(oldPictureProps.Image)
+        setImagePicture(oldPictureProps.image)
         setDescriptionPicture(oldPictureProps.description)
         console.log("Cambio detectado")
     }, [oldPictureProps])
@@ -24,7 +24,7 @@ function UpdateNewPictureProps({ updateNewPictureProps, oldPictureProps, closeFo
             name: namePicture,
             author: authorPicture,
             year: yearPicture,
-            image: imagePicture,
+            imageUrl: imagePicture,
             description: descriptionPicture
         }
         updateNewPictureProps(oldPictureProps.id, packagePicture)
