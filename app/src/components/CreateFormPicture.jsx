@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function CreateFormPicture({ createNewPictureProps, closeForm }) {
+function CreateFormPicture({ createNewPictureProps, closeForm, sendForm }) {
 
     const [namePicture, setNamePicture] = useState('')
     const [authorPicture, setAuthorPicture] = useState('')
@@ -45,15 +45,15 @@ function CreateFormPicture({ createNewPictureProps, closeForm }) {
                         />
                     </div>
                     <div><label> Descripción</label>
-                    <input className="cell_form"
-                        value={descriptionPicture} onChange={(event) => { setDescriptionPicture(event.target.value) }}
-                    />
+                        <input className="cell_form"
+                            value={descriptionPicture} onChange={(event) => { setDescriptionPicture(event.target.value) }}
+                        />
                     </div>
                 </div>
-                <button type="submit">Enviar</button>
-                 <button onClick={closeForm} className="btn btn-primary" type="button">
-                            Cerrar
-                        </button>        
+                <button onClick={sendForm} className="btn btn-primary" type="submit"> Enviar</button>
+                <button onClick={closeForm} className="btn btn-primary" type="button">
+                    Cerrar
+                </button>
             </form>
         </div>
     )
