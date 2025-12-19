@@ -19,7 +19,6 @@
 
 ## Descripción
 
-<<<<<<< HEAD
 ## Secciones y datos
 - Home
 - Galería (descripcion del edificio y de los 4 apostoles) (Javi)
@@ -50,45 +49,6 @@
     - Backend: {Express }
     - Base de Datos: {MongoDB}
     - Herramientas: {Git}
-=======
-Es un espacio dedicado a exhibir y promover obras visuales, pinturas, esculturas, fotografía y arte digital con una programación de exposiciones temporales o permanentes abiertas al público.
-
-## Instalación
-
-Explición de  cómo instalar el proyecto.
-
-```bash
-# Clonar el repositorio
-git clone https://github.com/jav1402/ArtGalleryNew.git
-
-# Ir al directorio del proyecto dentro de app
-cd ArtGalleryNew/app
-
-# Instalar dependencias
-npm install
-```
-**<font color = "red">El servidor iniciará en http://localhost:3000 o el puerto que se defina en el archivo .env de Frontend</font>**
-```bash
-# Abrir otro terminal para instacion desde el dirdtorio de api
-cd ArtGalleryNew/api
-
-# Instalar dependencias
-npm install
-```
-### Crear variable de entorno app
-El servidor de iniciara por defecto en la variable de entorno. env que se debe crear en la zona de Frontend, carpeta app
-
-## Configuración del Backend (dentro de api)
-
-# Variables de entorno api
-
-**<font color = "red">Se debe crear el archivo .env, para las variables de entorno</font>**
-
-
-MONGO_URI= " poner la configuración de la base de datos de MongoDB"
-MONGO_DB= Gallery
-PORT=3000
->>>>>>> 262454e1d4b15fed386301bcc00ad73da19129ba
 
 
 
