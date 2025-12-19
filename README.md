@@ -43,7 +43,7 @@ cd ArtGalleryNew/api
 # Instalar dependencias
 npm install
 ```
-### Crear vaiable de entorno app
+### Crear variable de entorno app
 El servidor de iniciara por defecto en la variable de entorno. env que se debe crear en la zona de Frontend, carpeta app
 
 ## Configuración del Backend (dentro de api)
