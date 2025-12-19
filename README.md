@@ -73,6 +73,36 @@ npm run dev
 **<font color = "red">El mensaje recibido sera El frontend iniciará en http://localhost:5173 (Vite)</font>**
 
 ---
+## Secciones y datos
+- Home
+- Galería (descripcion del edificio y de los 4 apostoles) (Javi)
+    - Room {
+        id: number, 
+        name: string,
+        category: string, 
+        size: number
+    }
+    
+- Artist(aqui van todos los artistas)(NURIA) {
+        id: number, 
+        name: string,
+        description:string, 
+        image: string
+    }
+- Exposición (aqui se van a mostrar todas las obras) (Pepi)
+    - Pictures {
+        id: number,
+        name: string,
+        autor: string,
+        year: number,
+        descripción: string,
+    }
+    
+- Tecnología
+    - Fronted: {React}
+    - Backend: {Express }
+    - Base de Datos: {MongoDB}
+    - Herramientas: {Git}
 
 ## Características
 
@@ -167,4 +197,4 @@ Planes futuros de tu proyecto:
 
 ## Agradecimientos
 
-A los tutores de este Bootcamp.
+A los tutores de este Bootcamp y a nuestros compañeros de Bootcamp Cristobal y Natalia.
