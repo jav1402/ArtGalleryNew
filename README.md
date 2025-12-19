@@ -31,11 +31,12 @@ Es un espacio dedicado a  exhibir y promover obras visuales, pinturas, escultura
         descripción: string,
     }
     
-- Tenología
+- Tecnología
     - Fronted: {React}
     - Backend: {Express }
     - Base de Datos: {MongoDB}
     - Herramientas: {Git}
+
 
 
 
