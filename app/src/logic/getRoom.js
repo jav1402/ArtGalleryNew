@@ -1,6 +1,8 @@
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 async function getRoom(){
   // Hacemos la petición a la URL de TU servidor local
-  return fetch("http://localhost:3000/Room")
+  return fetch(`${BASE_URL}/Room`)
     .then((response) => response.json()) // 1. Recibimos respuesta y la convertimos a JSON
     .then((data) => {
       console.log(data); // 2. Vemos los datos por consola (opcional, para debug)

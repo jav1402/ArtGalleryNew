@@ -57,12 +57,12 @@ api.get("/Artist", async (req, res) => {
 
 api.get("/Room", async (req, res) => {
     try {
-        const rooms = await Room.find().lean();
-        rooms.forEach((room)=>{
-            room.id = room._id.toString()
-            delete room._id
+        const rooms = await Room.find().lean();//esperamos  la busqueda de la room, lean limpia la informacion que no necesita 
+        rooms.forEach((room)=>{ // for.each ejecuta un codigo en todos los elemento de un array, lo usamos para sacar la propiedad .id
+            room.id = room._id.toString() //crea el .id con el mismo valor de _id, el frontend tiene .id mongo db tiene _id
+            delete room._id // borra el _id
         })
-        res.json(rooms);
+        res.json(rooms); //convierte la respuesta en json (rooms)
     } catch (err) {
         console.error("[ERROR] GET /picture:", err);
         res.json({ error: "DB_ERROR" });

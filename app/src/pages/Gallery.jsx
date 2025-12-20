@@ -80,9 +80,9 @@ function Gallery() {
                 {galleryState.map(item => (
                     <Room
                         key={item.id}
-                        roomProp={item}
-                        onDelete={handleDeleteRoom}
-                        onUpdate={setRoomUpdate} />
+                        roomProp={item}// pasamos un objeto con todas las propiedades
+                        onDelete={handleDeleteRoom}//pasamos la funcion por propiedad para hacer delete
+                        onUpdate={setRoomUpdate} />// pasamos la funcion por propiedad  para hacer update 
                 ))}
 
             </div>
